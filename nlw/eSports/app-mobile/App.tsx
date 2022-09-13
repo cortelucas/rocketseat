@@ -1,54 +1,31 @@
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-
-interface ButtonProps {
-  title: string
-}
+import { StatusBar, View } from 'react-native'
+import { 
+  useFonts,
+  Inter_400Regular,
+  Inter_600SemiBold,
+  Inter_700Bold,
+  Inter_900Black
+} from '@expo-google-fonts/inter'
+import { Background } from './src/components/Background'
+import { Home } from './src/screens/Home'
+import { Loading } from './src/components/Loading'
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    Inter_400Regular,
+    Inter_600SemiBold,
+    Inter_700Bold,
+    Inter_900Black
+  })
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
-        Hello React Native
-      </Text>
-      <StatusBar style="auto" />
-      <View>
-        <Text style={styles.test}>Caralho moleque</Text>
-        <StatusBar style='auto' backgroundColor='#cecece'></StatusBar>
-      </View>
-      <View>
-        <Button title='Issaê'/>
-      </View>
-    </View>
+    <Background>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      { fontsLoaded ? <Home/> : <Loading /> }
+    </Background>
   )
 }
-
-function Button({ title }: ButtonProps) {
-  return (
-    <TouchableOpacity style={styles.buttonOp}>
-      <Text>
-        {title}
-      </Text>
-    </TouchableOpacity>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#633bbc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  test: {
-    color: '#cecece'
-  },
-  title: {
-    color: '#cecece',
-    fontSize: 40
-  },
-  buttonOp: {
-    padding: 22,
-    border: '2px'
-  }
-})
