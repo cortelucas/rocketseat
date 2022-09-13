@@ -12,4 +12,4 @@
 
 ### 03 - Servidores
 
-![Entendendo as principais peças do computador](https://user-images.githubusercontent.com/56851943/184430906-6c186f2f-c20e-44ba-8c2e-245d814e384c.png)
+![Servidores](https://user-images.githubusercontent.com/56851943/189897251-1ca1a30a-fc63-42d0-8a40-db1ff233ccd9.png)
