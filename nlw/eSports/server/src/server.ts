@@ -78,6 +78,21 @@ server.post('/games/:id/ads', async (request: Request, response: Response) => {
   return response.status(201).json(ad)
 })
 
+server.get('/ads/:id/discord', async (request: Request, response: Response) => {
+  const adId = request.params.id
 
+  const ad = await prisma.ad.findUniqueOrThrow({
+    select: {
+      discord: true
+    },
+    where: {
+      id: adId
+    }
+  })
+
+  return response.json({
+    discord: ad.discord
+  })
+})
 
 server.listen(3333, () => console.log('Server is running in port 3333'))
