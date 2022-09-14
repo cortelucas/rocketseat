@@ -58,6 +58,26 @@ server.get('/games/:id/ads', async (request: Request, response: Response) => {
   }))
 })
 
+server.post('/games/:id/ads', async (request: Request, response: Response) => {
+  const gameId = request.params.id
+  const body = request.body
+
+  const ad = await prisma.ad.create({
+    data: {
+      gameId,
+      name: body.name,
+      yearsPlaying: body.yearsPlaying,
+      discord: body.discord,
+      weekDays: body.weekDays.join(','),
+      hourStart: convertHourStringToMinutes(body.hourStart),
+      hourEnd: convertHourStringToMinutes(body.hourEnd),
+      useVoiceChannel: body.useVoiceChannel
+    }
+  })
+
+  return response.status(201).json(ad)
+})
+
 
 
 server.listen(3333, () => console.log('Server is running in port 3333'))
