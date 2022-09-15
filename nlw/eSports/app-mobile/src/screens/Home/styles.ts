@@ -13,6 +13,7 @@ export const styles = StyleSheet.create({
   },
   contentList: {
     paddingLeft: 32,
+    marginTop: 48,
     paddingRight: 64
   }
 });
