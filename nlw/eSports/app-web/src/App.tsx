@@ -3,15 +3,13 @@ import * as Dialog from '@radix-ui/react-dialog'
 
 import { GameBanner } from './components/GameBanner'
 import { CreateAdBanner } from './components/CreateAdBanner/index'
-import { GameController } from 'phosphor-react'
+import { Modal } from './components/Modal'
 
 import './styles/main.css'
 import logo from '../public/assets/logo.svg'
-import { Input } from './components/Form/Input'
-import { Form } from './components/Form/Form'
-import { Modal } from './components/Modal'
+import axios from 'axios'
 
-interface Game {
+export interface Game {
   id: string
   title: string
   bannerUrl: string
@@ -24,9 +22,8 @@ export default function App() {
   const [games, setGames] = useState<Game[]>([])
 
   useEffect(() => {
-    fetch('http://localhost:3333/games')
-      .then(response => response.json())
-      .then(data => setGames(data))
+    axios('http://localhost:3333/games')
+      .then(({ data }) => setGames(data))
   }, [])
 
   return (
@@ -48,8 +45,10 @@ export default function App() {
           )
         })}
       </div>
-
-      <Modal />
+      <Dialog.Root>
+        <CreateAdBanner />
+        <Modal />
+      </Dialog.Root>
     </div>
   )
 }
