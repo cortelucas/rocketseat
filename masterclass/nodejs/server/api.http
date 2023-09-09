@@ -1,0 +1,32 @@
+GET http://localhost:3333/memories
+
+###
+
+POST http://localhost:3333/memories
+Content-Type: application/json
+
+{
+    "content": "test",
+    "coverURL": "https://github.com/cortelucas.png",
+    "isPublic": 1
+}
+
+###
+
+GET http://localhost:3333/memories/47b5a500-ae2a-4c94-a3d4-078cb4341962
+
+###
+PUT http://localhost:3333/memories/47b5a500-ae2a-4c94-a3d4-078cb4341962
+Content-Type: application/json
+
+{
+    "content": "lorem ipsum",
+    "coverURL": "https://github.com/rafaelmesneves.png",
+    "isPublic": 1
+}
+
+###
+DELETE http://localhost:3333/memories/aff87d0e-13fd-4ee2-865b-f0d040b3e271
+
+###
+GET http://localhost:3333/users
