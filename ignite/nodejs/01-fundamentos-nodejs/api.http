@@ -7,6 +7,6 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-    "name": "Lucas Corte",
-    "email": "lucas@corte.tech"
+    "name": "Leonardo Corte",
+    "email": "leo@corte.tech"
 }

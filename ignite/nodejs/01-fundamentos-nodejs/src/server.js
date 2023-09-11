@@ -1,48 +1,23 @@
-import { randomUUID } from 'node:crypto'
 import { createServer } from 'node:http'
-import { Database } from './infra/db.js'
 import { json } from './middlewares/json.js'
-
-const db = new Database()
+import { routes } from './routes/users/routes.js'
 
 const server = createServer(async (request, response) => {
   const { method, url } = request
 
   await json(request, response)
 
-  // try {
+  const route = routes.find(route => {
+    return route.method === method && route.path === url
+  })
 
-  // } catch (error) {
-  //   throw new Error(error)
-  // }
-
-  if (method === 'GET' && url === '/users') {
-    const users = db.select('users')
+  if (route) {
+    route.handler(request, response)
+  } else {
     return response
-      .setHeader('Content-type', 'application/json')
-      .end(JSON.stringify(users))
+      .writeHead(404)
+      .end('Not Found!')
   }
-  if (method === 'POST' && url === '/users') {
-    const { name, email } = request.body
-    const user = {
-      id: randomUUID(),
-      name,
-      email
-    }
-
-    db.insert('users', user)
-
-    return response
-      .setHeader('Content-type', 'application/json')
-      .writeHead(201)
-      .end(JSON.stringify({
-        message: `Usuário ${user.id} criado com sucesso.`,
-        user
-      }))
-  }
-  return response
-    .writeHead(404)
-    .end('Not Found!')
 })
 
 server.listen(3333, () => console.log('🚀 Server is running on http://localhost:3333'))
