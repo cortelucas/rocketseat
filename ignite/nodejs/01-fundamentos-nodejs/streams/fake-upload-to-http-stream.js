@@ -24,3 +24,5 @@ const request = new Request('http://localhost:3334/', {
 })
 
 await fetch(request)
+  .then(response => response.text())
+  .then(data => console.log(data))
