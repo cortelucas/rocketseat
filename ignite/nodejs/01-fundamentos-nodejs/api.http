@@ -1,0 +1,12 @@
+# list users
+GET http://localhost:3333/users
+
+###
+# create user
+POST http://localhost:3333/users
+Content-Type: application/json
+
+{
+    "name": "Andressa",
+    "email": "lucas@lucas.lucas"
+}
