@@ -62,7 +62,6 @@ export const routes = [
 
       const [task] = db.select('tasks', { id })
 
-      console.log(task)
       if (!task) {
         return response
           .writeHead(404)
@@ -96,6 +95,32 @@ export const routes = [
         .writeHead(200)
         .end(JSON.stringify({
           message: `Tarefa ${id} excluída com sucesso.`
+        }))
+    }
+  },
+  {
+    method: 'PATCH',
+    path: buildRoutePath('/tasks/:id/complete'),
+    handler: (request, response) => {
+      const { id } = request.params
+
+      const [task] = db.select('tasks', { id })
+
+      if (!task) {
+        return response
+          .writeHead(404)
+          .end('ERROR: Resource is not found.')
+      }
+
+      db.update('tasks', id, {
+        updatedAt: new Date().toISOString(),
+        completedAt: new Date().toISOString()
+      })
+
+      return response
+        .writeHead(200)
+        .end(JSON.stringify({
+          message: `Tarefa ${id} concluída com sucesso.`
         }))
     }
   }

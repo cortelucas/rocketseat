@@ -1,7 +1,8 @@
+# Read all tasks
 GET http://localhost:3333/tasks HTTP/1.1
 
 ###
-#
+# Create task
 POST http://localhost:3333/tasks HTTP/1.1
 Content-Type: : application/json
 
@@ -11,7 +12,7 @@ Content-Type: : application/json
 }
 
 ###
-#
+# Update task resource
 PUT http://localhost:3333/tasks/50de22c9-a6df-4e05-b094-b623cfcfa2e7 HTTP/1.1
 Content-Type: : application/json
 
@@ -20,5 +21,9 @@ Content-Type: : application/json
 }
 
 ###
-#
-DELETE http://localhost:3333/tasks/d1a32245-3365-427c-960e-a688a9c9526f HTTP/1.1
+# Completed task
+PATCH http://localhost:3333/tasks/50de22c9-a6df-4e05-b094-b623cfcfa2e7/complete HTTP/1.1
+
+###
+# Delete task
+DELETE http://localhost:3333/tasks/d3811e19-7b53-497d-afd4-b08e4e0bb4b3 HTTP/1.1
