@@ -83,5 +83,20 @@ export const routes = [
           message: `Tarefa ${id} atualizada com sucesso.`
         }))
     }
+  },
+  {
+    method: 'DELETE',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (request, response) => {
+      const { id } = request.params
+
+      db.delete('tasks', id)
+
+      return response
+        .writeHead(200)
+        .end(JSON.stringify({
+          message: `Tarefa ${id} excluída com sucesso.`
+        }))
+    }
   }
 ]
