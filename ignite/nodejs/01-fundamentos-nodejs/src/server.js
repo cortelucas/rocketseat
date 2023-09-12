@@ -1,6 +1,7 @@
 import { createServer } from 'node:http'
 import { json } from './middlewares/json.js'
 import { routes } from './routes/users/routes.js'
+import { extractQueryParams } from './ultils/extract-query-params.js'
 
 const server = createServer(async (request, response) => {
   const { method, url } = request
@@ -13,8 +14,13 @@ const server = createServer(async (request, response) => {
 
   if (route) {
     const routeParams = request.url.match(route.path)
-    request.params = { ...routeParams.groups }
-    route.handler(request, response)
+
+    const { query, ...params } = routeParams.groups
+
+    request.params = params
+    request.query = query ? extractQueryParams(query) : {}
+
+    return route.handler(request, response)
   } else {
     return response
       .writeHead(404)
