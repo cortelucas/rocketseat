@@ -7,8 +7,18 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-    "name": "Andressa K.M. Corte",
+    "name": "Lucas S. Corte",
     "email": "andressa@corte.tech"
+}
+
+###
+# update user
+PUT http://localhost:3333/users/ad49070b-b337-4a09-b6cb-e5dd230f5122
+Content-Type: application/json
+
+{
+    "name": "Lucas S. Corte",
+    "email": "lucas@corte.tech"
 }
 
 ###

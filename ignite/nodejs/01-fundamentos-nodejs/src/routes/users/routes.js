@@ -38,6 +38,22 @@ export const routes = [
     }
   },
   {
+    method: 'PUT',
+    path: buildRoutePath('/users/:id'),
+    handler: (request, response) => {
+      const { id } = request.params
+      const { name, email } = request.body
+
+      db.update('users', id, { name, email })
+
+      return response
+        .writeHead(201)
+        .end(JSON.stringify({
+          message: `Usuário ${id} atualizado com sucesso.`
+        }))
+    }
+  },
+  {
     method: 'DELETE',
     path: buildRoutePath('/users/:id'),
     handler: (request, response) => {
