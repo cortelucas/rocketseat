@@ -1,0 +1,17 @@
+{
+  "name": "tasks-api",
+  "version": "1.0.0",
+  "description": "API for task management.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start:dev": "node --watch src/server.js"
+  },
+  "keywords": [
+    "task",
+    "tasks",
+    "task-management"
+  ],
+  "author": "cortelucas",
+  "license": "ISC"
+}
