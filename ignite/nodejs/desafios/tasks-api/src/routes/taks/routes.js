@@ -44,5 +44,44 @@ export const routes = [
           task
         }))
     }
+  },
+  {
+    method: 'PUT',
+    path: buildRoutePath('/tasks/:id'),
+    handler: (request, response) => {
+      const { id } = request.params
+      const { title, description } = request.body
+
+      if (!title && !description) {
+        return response
+          .writeHead(400)
+          .end(JSON.stringify({
+            message: 'Title ou description são obrigatórios.'
+          }))
+      }
+
+      const [task] = db.select('tasks', { id })
+
+      console.log(task)
+      if (!task) {
+        return response
+          .writeHead(404)
+          .end('ERROR: Resource is not found.')
+      }
+
+      db.update('tasks', id, {
+        title: title || task.title,
+        description: description || task.description,
+        completedAt: null,
+        createdAt: task.createdAt,
+        updatedAt: new Date().toISOString()
+      })
+
+      return response
+        .writeHead(201)
+        .end(JSON.stringify({
+          message: `Tarefa ${id} atualizada com sucesso.`
+        }))
+    }
   }
 ]
