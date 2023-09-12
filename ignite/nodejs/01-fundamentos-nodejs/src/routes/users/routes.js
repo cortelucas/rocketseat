@@ -11,7 +11,6 @@ export const routes = [
     handler: (request, response) => {
       const users = db.select('users')
       return response
-        .setHeader('Content-type', 'application/json')
         .end(JSON.stringify(users))
     }
   },
@@ -29,7 +28,6 @@ export const routes = [
       db.insert('users', user)
 
       return response
-        .setHeader('Content-type', 'application/json')
         .writeHead(201)
         .end(JSON.stringify({
           message: `Usuário ${user.id} criado com sucesso.`,

@@ -10,4 +10,7 @@ export async function json (request, response) {
   } catch {
     request.body = null
   }
+
+  response
+    .setHeader('Content-type', 'application/json')
 }
