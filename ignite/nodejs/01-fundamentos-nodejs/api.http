@@ -7,6 +7,10 @@ POST http://localhost:3333/users
 Content-Type: application/json
 
 {
-    "name": "Leonardo Corte",
-    "email": "leo@corte.tech"
+    "name": "Andressa K.M. Corte",
+    "email": "andressa@corte.tech"
 }
+
+###
+# delete user
+DELETE http://localhost:3333/users/a20c46bf-2d52-4c44-8988-d91ac38dc56d
