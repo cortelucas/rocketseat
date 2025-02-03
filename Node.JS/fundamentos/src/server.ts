@@ -36,10 +36,11 @@ const server = createServer((request, response) => {
     );
   }
 
-  response.writeHead(200, { "Content-Type": "application/json" });
-  return response.end(JSON.stringify({ message: "Hello World" }));
+  return response
+    .writeHead(404, { "Content-Type": "application/json" })
+    .end(JSON.stringify({ message: "Not Found" }));
 });
 
 server.listen(3333, () => {
-  console.log("Server is running");
+  console.log("Server is running 🚀");
 });
