@@ -1,8 +1,21 @@
 import { createServer } from "node:http";
 
-//converter código para typescript
 const server = createServer((request, response) => {
-  return response.end("Hello World!");
+  const { method, url } = request;
+  console.log(method, url);
+
+  if (method === "GET" && url === "/users") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    return response.end(JSON.stringify({ message: "Listagem de usuários" }));
+  }
+
+  if (method === "POST" && url === "/users") {
+    response.writeHead(200, { "Content-Type": "application/json" });
+    return response.end(JSON.stringify({ message: "Criação de usuários" }));
+  }
+
+  response.writeHead(200, { "Content-Type": "application/json" });
+  return response.end(JSON.stringify({ message: "Hello World" }));
 });
 
 server.listen(3333, () => {
