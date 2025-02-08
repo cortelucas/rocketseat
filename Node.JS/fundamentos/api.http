@@ -1,0 +1,8 @@
+@baseURL = http://localhost:3333
+
+# @name getAllUsers
+GET {{baseURL}}/users HTTP/1.1
+
+###
+# @name createNewUser
+POST {{baseURL}}/users HTTP/1.1
