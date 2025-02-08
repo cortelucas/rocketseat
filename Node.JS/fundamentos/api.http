@@ -6,3 +6,9 @@ GET {{baseURL}}/users HTTP/1.1
 ###
 # @name createNewUser
 POST {{baseURL}}/users HTTP/1.1
+Content-Type: application/json
+
+{
+  "name": "Jhon Doe",
+  "email": "jhon.doe@example.com"
+}

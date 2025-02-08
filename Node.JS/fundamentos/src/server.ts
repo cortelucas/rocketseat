@@ -9,9 +9,19 @@ interface User {
 
 const users: User[] = [];
 
-const server = createServer((request, response) => {
+const server = createServer(async (request, response) => {
+  const buffers: Buffer[] = [];
+  for await (const chunk of request) {
+    buffers.push(chunk);
+  }
+
+  try {
+    request.body = JSON.parse(Buffer.concat(buffers).toString());
+  } catch {
+    request.body = null;
+  }
+
   const { method, url } = request;
-  console.log(method, url);
 
   if (method === "GET" && url === "/users") {
     return response
@@ -22,10 +32,11 @@ const server = createServer((request, response) => {
   }
 
   if (method === "POST" && url === "/users") {
+    const { name, email } = request.body
     const newUser = {
       id: randomUUID(),
-      name: "John Doe",
-      email: "john.doe@example.com",
+      name,
+      email
     };
     users.push(newUser);
 
