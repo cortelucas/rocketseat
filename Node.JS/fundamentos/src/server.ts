@@ -1,49 +1,51 @@
-import { createServer } from "node:http";
-import { randomUUID } from "node:crypto";
+import { createServer } from "node:http"
+import { randomUUID } from "node:crypto"
 import { json } from "./middlewares/json.ts"
+import { Database } from "./database.ts"
 
 interface User {
-  id: string;
-  name: string;
-  email: string;
+  id: string
+  name: string
+  email: string
 }
 
-const users: User[] = [];
+const database = new Database()
 
 const server = createServer(async (request, response) => {
-  const { method, url } = request;
+  const { method, url } = request
 
   await json(request, response)
 
   if (method === "GET" && url === "/users") {
+    const users = database.select('users')
     return response
       .writeHead(200)
-      .end(JSON.stringify(users));
+      .end(JSON.stringify(users))
   }
 
   if (method === "POST" && url === "/users") {
     const { name, email } = request.body
-    const newUser = {
+    const user = {
       id: randomUUID(),
       name,
       email
-    };
-    users.push(newUser);
+    }
+    database.insert('users', user)
 
     return response
       .writeHead(201)
       .end(
         JSON.stringify({
-          message: `Usuário ${newUser.id} - ${newUser.name} criado com sucesso.`,
+          message: `Usuário ${user.id} - ${user.name} criado com sucesso.`,
         })
-      );
+      )
   }
 
   return response
     .writeHead(404)
-    .end(JSON.stringify({ message: "Not Found" }));
-});
+    .end(JSON.stringify({ message: "Not Found" }))
+})
 
 server.listen(3333, () => {
-  console.log("Server is running 🚀");
-});
+  console.log("Server is running 🚀")
+})
