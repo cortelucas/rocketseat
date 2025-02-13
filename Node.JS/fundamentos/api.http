@@ -12,3 +12,7 @@ Content-Type: application/json
   "name": "Lucas Corte",
   "email": "cortelucas@example.com"
 }
+
+###
+# @name deleteUser
+DELETE {{baseURL}}/users/b78f14fd-0e10-4404-8aa8-a66259af9813 HTTP/1.1

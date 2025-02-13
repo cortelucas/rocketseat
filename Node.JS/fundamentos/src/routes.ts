@@ -39,7 +39,9 @@ export const routes = [
     handler: (request, response) => {
       const { id } = request.params;
 
+      database.delete("users", id);
+
       return response.writeHead(204).end();
     },
-  }
+  },
 ];
