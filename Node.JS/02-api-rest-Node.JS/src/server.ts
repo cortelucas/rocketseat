@@ -1,18 +1,19 @@
 import fastify from 'fastify'
 import { knex } from './database'
+import { randomUUID } from 'node:crypto'
 
 const server = fastify()
 
-server.get('/health-check', async (request, reply) => {
-	const tables = await knex('sqlite_schema').select('*')
+server.get('/hello', async (request, reply) => {
+	const transactions = await knex('transactions').select('*')
 
-	return tables
+	return transactions
 })
 
 try {
 	server
 		.listen({
-			port: 3000,
+			port: 3333,
 			host: '0.0.0.0',
 		})
 		.then(address => console.log(`Server listening on ${address}`))
