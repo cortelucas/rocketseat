@@ -1,28 +1,26 @@
 {
-  "name": "02-api-rest-nodejs",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "keywords": [
-    "nodejs",
-    "typescript",
-    "rest",
-    "api"
-  ],
-  "author": "Lucas dos Santos Corte <cortelucas>",
-  "scripts": {
-    "start": "node dist/server.js",
-    "start:dev": "tsx watch src/server.ts",
-    "build": "tsup src"
-  },
-  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
-  "devDependencies": {
-    "@types/node": "^22.13.4",
-    "tsup": "^8.3.6",
-    "tsx": "^4.19.3",
-    "typescript": "^5.7.3"
-  },
-  "dependencies": {
-    "fastify": "^5.2.1"
-  }
+	"name": "02-api-rest-nodejs",
+	"version": "1.0.0",
+	"main": "index.js",
+	"license": "MIT",
+	"keywords": ["nodejs", "typescript", "rest", "api"],
+	"author": "Lucas dos Santos Corte <cortelucas>",
+	"scripts": {
+		"start": "node dist/server.js",
+		"start:dev": "tsx watch src/server.ts",
+		"build": "tsup src",
+		"lint": "biome check",
+		"lint:fix": "biome check --write"
+	},
+	"packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"@types/node": "^22.13.4",
+		"tsup": "^8.3.6",
+		"tsx": "^4.19.3",
+		"typescript": "^5.7.3"
+	},
+	"dependencies": {
+		"fastify": "^5.2.1"
+	}
 }
