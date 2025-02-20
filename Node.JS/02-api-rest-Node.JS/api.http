@@ -1,0 +1,16 @@
+@baseURL = http://localhost:3333
+
+###
+# @name createTransaction
+POST {{baseURL}}/transactions
+Content-Type: application/json
+
+{
+	"title": "Salário",
+	"amount": 1000,
+	"type": "credit"
+}
+
+###
+# @name listAllTransaction
+GET {{baseURL}}/transactions HTTP/1.1
