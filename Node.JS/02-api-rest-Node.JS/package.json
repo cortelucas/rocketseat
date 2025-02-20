@@ -22,7 +22,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
 		"@types/node": "^22.13.4",
-		"tsup": "^8.3.6",
+		"tsup": "^2.0.3",
 		"tsx": "^4.19.3",
 		"typescript": "^5.7.3"
 	},
@@ -30,6 +30,7 @@
 		"dotenv": "^16.4.7",
 		"fastify": "^5.2.1",
 		"knex": "^3.1.0",
-		"sqlite3": "^5.1.7"
+		"sqlite3": "^5.1.7",
+		"zod": "^3.24.2"
 	}
 }
