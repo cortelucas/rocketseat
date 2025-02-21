@@ -23,4 +23,10 @@ export async function transactionsRoutes(server: FastifyInstance) {
 
 		return reply.status(201).send()
 	})
+
+	server.get('/transactions', async (request, reply) => {
+		const transactions = await knex('transactions').select('*')
+
+		return reply.status(200).send(transactions)
+	})
 }
