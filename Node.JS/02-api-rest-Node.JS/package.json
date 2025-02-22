@@ -3,12 +3,7 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
-	"keywords": [
-		"nodejs",
-		"typescript",
-		"rest",
-		"api"
-	],
+	"keywords": ["nodejs", "typescript", "rest", "api"],
 	"author": "Lucas dos Santos Corte <cortelucas>",
 	"scripts": {
 		"start": "node dist/server.js",
