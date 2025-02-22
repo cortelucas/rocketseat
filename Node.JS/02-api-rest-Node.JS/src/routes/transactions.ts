@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify'
 import { knex } from '../database'
 import z from 'zod'
 import { randomUUID } from 'node:crypto'
+import { checkSessionIdExists } from '../middlewares'
 
 export async function transactionsRoutes(server: FastifyInstance) {
 	server.post('/transactions', async (request, reply) => {
@@ -36,32 +37,56 @@ export async function transactionsRoutes(server: FastifyInstance) {
 		return reply.status(201).send()
 	})
 
-	server.get('/transactions', async (request, reply) => {
-		const transactions = await knex('transactions').select('*')
+	server.get(
+		'/transactions',
+		{ preHandler: [checkSessionIdExists] },
+		async (request, reply) => {
+			const { sessionId } = request.cookies
 
-		return reply.status(200).send({ transactions })
-	})
+			const transactions = await knex('transactions')
+				.where('session_id', sessionId)
+				.select('*')
 
-	server.get('/transactions/:id', async (request, reply) => {
-		const getTransactionParamsSchema = z.object({
-			id: z.string().uuid(),
-		})
+			return reply.status(200).send({ transactions })
+		}
+	)
 
-		const { id } = getTransactionParamsSchema.parse(request.params)
+	server.get(
+		'/transactions/:id',
+		{ preHandler: [checkSessionIdExists] },
+		async (request, reply) => {
+			const getTransactionParamsSchema = z.object({
+				id: z.string().uuid(),
+			})
 
-		const transaction = await knex('transactions')
-			.select('*')
-			.where('id', id)
-			.first()
+			const { id } = getTransactionParamsSchema.parse(request.params)
 
-		return reply.status(200).send({ transaction })
-	})
+			const { sessionId } = request.cookies
 
-	server.get('/transactions/summary', async (request, reply) => {
-		const summary = await knex('transactions')
-			.sum('amount', { as: 'amount' })
-			.first()
+			const transaction = await knex('transactions')
+				.select('*')
+				.where({
+					session_id: sessionId,
+					id,
+				})
+				.first()
 
-		return reply.status(200).send({ summary })
-	})
+			return reply.status(200).send({ transaction })
+		}
+	)
+
+	server.get(
+		'/transactions/summary',
+		{ preHandler: [checkSessionIdExists] },
+		async (request, reply) => {
+			const { sessionId } = request.cookies
+
+			const summary = await knex('transactions')
+				.where('session_id', sessionId)
+				.sum('amount', { as: 'amount' })
+				.first()
+
+			return reply.status(200).send({ summary })
+		}
+	)
 }
