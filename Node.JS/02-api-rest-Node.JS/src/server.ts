@@ -1,10 +1,13 @@
 import fastify from 'fastify'
+import cookie from '@fastify/cookie'
 import { env } from './env'
 import { transactionsRoutes } from './routes'
 
 const server = fastify()
 
-for (const route of [ transactionsRoutes ]) {
+server.register(cookie)
+
+for (const route of [transactionsRoutes]) {
 	server.register(route)
 }
 
