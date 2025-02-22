@@ -18,3 +18,7 @@ GET {{baseURL}}/transactions HTTP/1.1
 ###
 # @name listTransactionById
 GET {{baseURL}}/transactions/e87cd985-b417-43d8-b562-4ec94ae05aa0 HTTP/1.1
+
+###
+# @name summaryTransactions
+GET {{baseURL}}/transactions/summary HTTP/1.1
