@@ -6,9 +6,9 @@ POST {{baseURL}}/transactions
 Content-Type: application/json
 
 {
-	"title": "Salário",
-	"amount": 1000,
-	"type": "credit"
+	"title": "Aluguel",
+	"amount": 400,
+	"type": "debit"
 }
 
 ###
