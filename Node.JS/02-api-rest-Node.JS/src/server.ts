@@ -1,15 +1,5 @@
-import cookie from '@fastify/cookie'
-import fastify from 'fastify'
+import { server } from './app'
 import { env } from './env'
-import { transactionsRoutes } from './routes'
-
-const server = fastify()
-
-server.register(cookie)
-
-for (const route of [transactionsRoutes]) {
-	server.register(route)
-}
 
 try {
 	server
