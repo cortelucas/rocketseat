@@ -3,7 +3,12 @@
 	"version": "1.0.0",
 	"main": "index.js",
 	"license": "MIT",
-	"keywords": ["nodejs", "typescript", "rest", "api"],
+	"keywords": [
+		"nodejs",
+		"typescript",
+		"rest",
+		"api"
+	],
 	"author": "Lucas dos Santos Corte <cortelucas>",
 	"scripts": {
 		"start": "node dist/server.js",
@@ -11,7 +16,9 @@
 		"knex": "node --import tsx ./node_modules/.bin/knex",
 		"build": "tsup src",
 		"lint": "biome check",
-		"lint:fix": "biome check --write"
+		"lint:fix": "biome check --write",
+		"test": "vitest",
+		"test:watch": "vitest --watch"
 	},
 	"packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
 	"devDependencies": {
@@ -19,7 +26,8 @@
 		"@types/node": "^22.13.4",
 		"tsup": "^2.0.3",
 		"tsx": "^4.19.3",
-		"typescript": "^5.7.3"
+		"typescript": "^5.7.3",
+		"vitest": "^3.0.6"
 	},
 	"dependencies": {
 		"@fastify/cookie": "^11.0.2",
